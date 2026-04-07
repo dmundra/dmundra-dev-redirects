@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+### ========================================
+### Rules for dmundra.dev & danielmundra.dev
+### ========================================
+
+# 1. Force non-www for the main domain (www.dmundra.dev -> dmundra.dev)
+RewriteCond %{HTTP_HOST} ^www\.dmundra\.dev$ [NC]
+RewriteRule ^(.*)$ https://dmundra.dev/$1 [R=301,L]
+
+# 2. Special redirect for /wkly (old domain -> new domain + query)
+RewriteCond %{HTTP_HOST} ^(www\.)?danielmundra\.dev$ [NC]
+RewriteRule ^wkly/?$ https://dmundra.dev/?path=wkly [R=301,L]
+
+# 3. Special redirect for /movies (old domain -> new domain + query)
+RewriteCond %{HTTP_HOST} ^(www\.)?danielmundra\.dev$ [NC]
+RewriteRule ^movies/?$ https://dmundra.dev/?path=movies [R=301,L]
+
+# 4. Catch-all redirect for everything else (old domain -> new domain)
+RewriteCond %{HTTP_HOST} ^(www\.)?danielmundra\.dev$ [NC]
+RewriteRule ^(.*)$ https://dmundra.dev/$1 [R=301,L]
+
+
+### ========================================
+### Rules for eugtbp.org
+### ========================================
+
+# 5. Metro: /movies -> eugenetoolboxproject.org with UTM parameters
+RewriteCond %{HTTP_HOST} ^(www\.)?eugtbp\.org$ [NC]
+RewriteRule ^movies/?$ https://www.eugenetoolboxproject.org/?utm_source=ad&utm_medium=image&utm_campaign=broadwaymetro [R=301,L]
+
+# 6. Eugene weekly: /wkly -> eugenetoolboxproject.org with UTM parameters
+RewriteCond %{HTTP_HOST} ^(www\.)?eugtbp\.org$ [NC]
+RewriteRule ^wkly/?$ https://www.eugenetoolboxproject.org/?utm_source=ad&utm_medium=newspaper&utm_campaign=eugeneweekly [R=301,L]
+
+# 7. Optimized Catch-all for eugtbp.org (Handles www -> non-www AND the final redirect simultaneously)
+RewriteCond %{HTTP_HOST} ^(www\.)?eugtbp\.org$ [NC]
+RewriteRule ^(.*)$ https://www.eugenetoolboxproject.org/$1 [R=301,L]
+
+</IfModule>
