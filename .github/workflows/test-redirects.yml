@@ -1,0 +1,23 @@
+name: Test Redirects
+
+# The workflow_dispatch event allows you to run this manually from the Actions tab
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run curl tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code so the runner can access your script
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Ensure the script has executable permissions
+      - name: Make script executable
+        run: chmod +x test_redirects.sh
+
+      # Step 3: Execute the script
+      - name: Run Redirect Tests
+        run: ./test_redirects.sh
