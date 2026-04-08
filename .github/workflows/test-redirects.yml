@@ -12,7 +12,7 @@ jobs:
     steps:
       # Step 1: Check out the repository code so the runner can access your script
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Step 2: Ensure the script has executable permissions
       - name: Make script executable
